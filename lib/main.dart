@@ -1,9 +1,13 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_taskList[index].contains('(Completed)')) {
         _taskList[index] = _taskList[index].replaceAll('(Completed)', '');
       } else {
-        _taskList[index] = _taskList[index] + ' (Completed)';
+        _taskList[index] = '${_taskList[index]} (Completed)';
       }
       _saveData();
     });
@@ -82,23 +86,23 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Edit task'),
+          title: const Text('Edit task'),
           content: TextField(
             controller: _controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Edit task',
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
                 _controller.clear();
               },
             ),
             TextButton(
-              child: Text('Save'),
+              child: const Text('Save'),
               onPressed: () {
                 setState(() {
                   _taskList[index] = _controller.text;
@@ -148,13 +152,13 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                   onPressed: () {
                     _editTask(index);
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                   onPressed: () {
                     _removeTask(index);
                   },
@@ -183,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           TextField(
             controller: _controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Add task',
             ),
             onSubmitted: (String value) {
